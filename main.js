@@ -32,8 +32,8 @@ function createCards(n) {
         tarjeta += "<img class='card-img-top' src = '" + card.image + "'>";
         tarjeta += "<div class='card-body'>";
         tarjeta += "<h5 class='card-title'>" + card.name + "</h5>";
-        tarjeta +=
-          "<p class='card-text'>Descripcion: " + card.description + "</p>";
+        tarjeta += "<p class='card-text'>" + card.description + "</p>";
+        tarjeta += "<b class='card-text'>" + card.price + "</b>";
         tarjeta +=
           "<button type='button' class='btn btn-primary' onclick='agregarCarrito()' value='addCart'> Add to cart </button> ";
         tarjeta += "</div>";
