@@ -1,3 +1,6 @@
+let cantidadProductos = 0;
+let items = document.getElementById("items");
+let sep = document.getElementById("separador");
 let burger = document.getElementById("burgers");
 let taco = document.getElementById("tacos");
 let salad = document.getElementById("salads");
@@ -9,6 +12,12 @@ let categoria = document.getElementById("categoriaActual");
 const data = "./restaurant.json";
 
 let array = [];
+
+function agregarCarrito() {
+  cantidadProductos++;
+
+  items.innerHTML = cantidadProductos + " items";
+}
 
 function createCards(n) {
   fetch(data)
@@ -26,7 +35,7 @@ function createCards(n) {
         tarjeta +=
           "<p class='card-text'>Descripcion: " + card.description + "</p>";
         tarjeta +=
-          "<button type='button' class='btn btn-primary' value='addCart'> Add to cart </button> ";
+          "<button type='button' class='btn btn-primary' onclick='agregarCarrito()' value='addCart'> Add to cart </button> ";
         tarjeta += "</div>";
         tarjeta += "</div>";
       });
@@ -35,23 +44,33 @@ function createCards(n) {
 }
 
 burger.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
   categoria.innerHTML = "Burgers";
   createCards(0);
 });
 
 taco.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
   categoria.innerHTML = "Tacos";
   createCards(1);
 });
 salad.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
   categoria.innerHTML = "Salads";
   createCards(2);
 });
 dessert.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
   categoria.innerHTML = "Desserts";
   createCards(3);
 });
 drink.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
   categoria.innerHTML = "Drinks & Sides";
   createCards(4);
 });
