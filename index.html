@@ -23,18 +23,44 @@
         <title>Parcial 1</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div class= "row">
             <div class = "col-10">
                 <h1>Restaurante</h1>
             </div>
             <div class = "col-2">
-                <img src = "https://i.imgur.com/1EKrQIi.png"
-                     alt = "carrito"
-                     id = "carrito"/>
+                <img src = "img/carro.png"
+                     alt = "Carro de compras"
+                     id = "carroCompra">
 
             </div>
         </div>
+        <hr/>
+        <div class ="text-center">
+            <img class ="rounded" src="img/anvorguesa.png" alt="Hamburguesa " id="hamburguesa">
+        </div>
+        <hr/>
+        <div class = "container">
+            <div class="row" id= "categorias">
+                <div class="col-1 " id="burgers">Burgers</div>
+                <div class="col-1 " id="tacos">Tacos</div>
+                <div class="col-1 " id="salads">Salads</div>
+                <div class="col-1 " id="desserts">Desserts</div>
+                <div class="col-2 " id="drinks">Drinks & Sides</div>
+            </div>
+        </div>
+        <hr/>
+        <!-- Categoria actual  -->
+        <div class = "text-center">
+            <h2 id = "categoriaActual">Categoria</h2> 
+        </div>
+        <hr/><div class="container">
+            <h2>Tarjetas</h2>
+            <div class="card-deck" id="cartas">
+        
+            </div>
+        </div>
     </div>
+    <script src="main.js"></script>
 </body>
 </html>
