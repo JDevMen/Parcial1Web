@@ -10,16 +10,32 @@ let drink = document.getElementById("drinks");
 
 let categoria = document.getElementById("categoriaActual");
 
+let tableDiv = document.getElementById("tableDiv");
+
 const data = "./restaurant.json";
 
 let cart = [];
 let array = [];
 
-function agregarCarrito() {
+function agregarCarrito(item) {
+  let name = item.name;
+  let found = cart.find((i) => i["description"] === name);
+  if (cart.length == 0 || !found) {
+    let newItem = {
+      qty: 1,
+      description: name,
+      unitPrice: item.price,
+      amount: item.price,
+    };
+    cart.push(newItem);
+  } else {
+    found.qty++;
+    found.amount += found.unitPrice;
+  }
+
   cantidadProductos++;
-  // let cartas = document.getElementById("cartas");
-  // console.log("Deck de cartas", cartas.children("div"));
   items.innerHTML = cantidadProductos + " items";
+  console.log(cart);
 }
 
 function clearCards() {
@@ -29,8 +45,6 @@ function clearCards() {
   }
 }
 
-function listaItems() {}
-
 //Función creación de tarjetas
 function createCards(n) {
   fetch(data)
@@ -39,7 +53,6 @@ function createCards(n) {
       array = resp;
       let listaItems = array[n].products;
       let cartas = document.getElementById("cartas");
-      let m = 0;
       for (let i = 0; i < listaItems.length; i++) {
         let card = listaItems[i];
 
@@ -87,11 +100,62 @@ function createCards(n) {
 
         addToCart.addEventListener("click", () => {
           console.log(card);
-          cart.push(card);
-          agregarCarrito();
+          // cart.push(card);
+          agregarCarrito(card);
         });
       }
     });
+}
+
+//Función crear tabla de orden
+function orderDetail() {
+  let table = document.createElement("table");
+  table.className = "table table-bordered table-striped table-hover";
+
+  let tableHead = document.createElement("thead");
+  let trHead = document.createElement("tr");
+
+  let itemH = document.createElement("th");
+  itemH.scope = "col";
+  itemH.innerHTML = "Item";
+
+  let qtyH = document.createElement("th");
+  qtyH.scope = "col";
+  qtyH.innerHTML = "Qty.";
+
+  let descH = document.createElement("th");
+  descH.scope = "col";
+  descH.innerHTML = "Description";
+
+  let unitH = document.createElement("th");
+  unitH.scope = "col";
+  unitH.innerHTML = "Unit Price";
+
+  let amountH = document.createElement("th");
+  amountH.scope = "col";
+  amountH.innerHTML = "Amount";
+
+  let modifyH = document.createElement("th");
+  modifyH.scope = "col";
+  modifyH.innerHTML = "Modify";
+
+  trHead.appendChild(itemH);
+  trHead.appendChild(qtyH);
+  trHead.appendChild(descH);
+  trHead.appendChild(unitH);
+  trHead.appendChild(amountH);
+  trHead.appendChild(modifyH);
+
+  tableHead.appendChild(trHead);
+
+  let tableBody = document.createElement("tbody");
+
+  //Agregar tHead y tbody
+  table.appendChild(tableHead);
+
+  tableDiv.appendChild(table);
+
+  console.log(tableDiv);
 }
 
 //Event listeners categorias
@@ -134,5 +198,10 @@ drink.addEventListener("click", () => {
 
 //Event listener carrito
 carrito.addEventListener("click", () => {
+  separador.hidden = false;
+  categoria.hidden = false;
+  categoria.innerHTML = "Order detail";
+  clearCards();
+  orderDetail();
   console.log(cart);
 });
