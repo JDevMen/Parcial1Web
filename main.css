@@ -1,3 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+#title {
+  font-family: "Satisfy", cursive;
+  margin-top: 1em;
+  margin-left: 1em;
+}
+
 #carroCompra {
   width: 4em;
   height: 4em;
@@ -5,5 +12,9 @@
 }
 
 #categorias {
-  background-color: antiquewhite;
+  background-color: #2d2b2c;
+  height: 4em;
+  width: 100%;
+  text-align: center;
+  color: white;
 }

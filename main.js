@@ -50,7 +50,6 @@ function agregarCarrito(item) {
 
   cantidadProductos++;
   items.innerHTML = cantidadProductos + " items";
-  console.log(cart);
 }
 
 //Función agregar cantidad a item en carrito
@@ -219,8 +218,6 @@ function createCards(n) {
         cartas.appendChild(col);
 
         addToCart.addEventListener("click", () => {
-          console.log(card);
-          // cart.push(card);
           agregarCarrito(card);
         });
       }
@@ -271,10 +268,8 @@ function orderDetail() {
 
   //Table body
   let tableBody = document.createElement("tbody");
-  console.log("cart", cart);
   for (let i = 0; i < cart.length; i++) {
     const element = cart[i];
-    console.log("element", element);
     let newRow = tableBody.insertRow();
     let item = newRow.insertCell();
     let qty = newRow.insertCell();
@@ -312,7 +307,6 @@ function orderDetail() {
   tableDiv.appendChild(table);
 
   orderFunction();
-  console.log(tableDiv);
 }
 
 //Función crear total y botones de orden
@@ -344,7 +338,7 @@ function orderFunction() {
   confirm.className = "btn btn-light";
   confirm.innerHTML = "Confirm order";
   confirm.addEventListener("click", () => {
-    console.log("compra", cart);
+    console.log(cart);
     quitarItemsCarrito();
   });
 
@@ -420,5 +414,4 @@ carrito.addEventListener("click", () => {
   categoria.innerHTML = "Order detail";
   clearCards();
   orderDetail();
-  console.log(cart);
 });
