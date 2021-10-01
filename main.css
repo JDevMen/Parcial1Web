@@ -2,19 +2,73 @@
 #title {
   font-family: "Satisfy", cursive;
   margin-top: 1em;
-  margin-left: 1em;
+}
+
+#header {
+  vertical-align: middle;
+  text-align: center;
+  margin-top: 1em;
+}
+
+#itemDiv {
+  vertical-align: center;
+  margin-top: 3em;
+  margin-right: 1em;
 }
 
 #carroCompra {
-  width: 4em;
-  height: 4em;
-  border: 1em;
+  width: 3em;
+  height: 3em;
+  margin-top: 1em;
+  margin-left: 1em;
 }
 
 #categorias {
   background-color: #2d2b2c;
-  height: 4em;
+  height: 5em;
   width: 100%;
   text-align: center;
   color: white;
+}
+
+#categoriaDiv {
+  background-color: #2d2b2c;
+  width: 100%;
+  color: white;
+}
+
+#hamburguesa {
+  width: 100%;
+}
+
+.btn-danger,
+.btn-light {
+  color: black;
+  margin: 1em;
+  margin: 0.5em;
+  border: 2px solid-black;
+  border-color: black;
+}
+
+.btn-light {
+  background-color: #f3e7de;
+}
+
+.btn-secondary {
+  margin: 0.5em;
+}
+
+.card {
+  border-radius: 7px;
+  width: 18rem;
+}
+
+.card-title {
+  margin-top: 1em;
+}
+
+.card-img-top {
+  border-radius: 1em 1em 1em 1em;
+  height: 12em;
+  width: 15em;
 }

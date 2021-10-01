@@ -56,11 +56,12 @@ function agregarCarrito(item) {
 function masItem(item, htmlQty, htmlAmount) {
   item.qty++;
   item.amount += item.unitPrice;
+  cantidadProductos++;
   htmlQty.innerHTML = item.qty;
-  htmlAmount.innerHTML = item.amount;
+  htmlAmount.innerHTML = item.amount.toFixed(2);
   let total = document.getElementById("totalB");
-  total.innerHTML = "Total: $" + getTotal();
-  items.innerHTML = cart.length + " items";
+  total.innerHTML = "Total: $" + getTotal().toFixed(2);
+  items.innerHTML = cantidadProductos + " items";
 }
 
 //Función quitar cantidad a item en carrito
@@ -68,22 +69,24 @@ function menosItem(item, htmlQty, htmlAmount) {
   item.qty--;
   let indexItem = cart.indexOf(item);
   let total = document.getElementById("totalB");
+  cantidadProductos--;
   if (item.qty > 0) {
     item.amount -= item.unitPrice;
     htmlQty.innerHTML = item.qty;
-    htmlAmount.innerHTML = item.amount;
+    htmlAmount.innerHTML = item.amount.toFixed(2);
   } else {
     cart.splice(indexItem, 1);
     clearTable();
     orderDetail();
   }
-  total.innerHTML = "Total: $" + getTotal();
-  items.innerHTML = cart.length + " items";
+  total.innerHTML = "Total: $" + getTotal().toFixed(2);
+  items.innerHTML = cantidadProductos + " items";
 }
 
 //Función para quitar todos los items del carrito
 function quitarItemsCarrito() {
   cart = [];
+  cantidadProduct = 0;
   clearTable();
   orderDetail();
   items.innerHTML = " items";
@@ -183,7 +186,7 @@ function createCards(n) {
 
         let photo = document.createElement("img");
         photo.src = card.image;
-        photo.className = "card-img-top";
+        photo.className = "card-img-top mx-auto d-block";
 
         let body = document.createElement("div");
         body.className = "card-body";
@@ -282,7 +285,7 @@ function orderDetail() {
     qty.innerHTML = element.qty;
     desc.innerHTML = element.description;
     unit.innerHTML = element.unitPrice;
-    amount.innerHTML = element.amount;
+    amount.innerHTML = element.amount.toFixed(2);
 
     let botonMenos = document.createElement("button");
     botonMenos.type = "button";
@@ -315,16 +318,16 @@ function orderFunction() {
   row.className = "row";
 
   let total = document.createElement("div");
-  total.className = "col-8";
+  total.className = "col-9";
 
   let b = document.createElement("b");
   b.id = "totalB";
-  b.innerText = "Total: $" + getTotal();
+  b.innerText = "Total: $" + getTotal().toFixed(2);
 
   total.appendChild(b);
 
   let botones = document.createElement("div");
-  botones.className = "col-4";
+  botones.className = "col-3";
 
   let cancel = document.createElement("button");
   cancel.type = "button";
@@ -340,6 +343,7 @@ function orderFunction() {
   confirm.addEventListener("click", () => {
     console.log(cart);
     quitarItemsCarrito();
+    cantidadProductos = 0;
   });
 
   botones.appendChild(cancel);
