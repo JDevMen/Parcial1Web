@@ -11,11 +11,13 @@ let dessert = document.getElementById("desserts");
 let drink = document.getElementById("drinks");
 let categoria = document.getElementById("categoriaActual");
 let tableDiv = document.getElementById("tableDiv");
-
+let bodyDoc = document.body;
 //Variables auxiliares----------------------
 let cantidadProductos = 0;
 let cart = [];
 let array = [];
+
+createModal();
 
 //Funciones de cálculo o modificación------------------------
 //Función obtener total de orden
@@ -80,7 +82,88 @@ function menosItem(item, htmlQty, htmlAmount) {
   items.innerHTML = cart.length + " items";
 }
 
+//Función para quitar todos los items del carrito
+function quitarItemsCarrito() {
+  cart = [];
+  clearTable();
+  orderDetail();
+  items.innerHTML = " items";
+}
+
 //------------------Funciones de creación--------------------
+
+function createModal() {
+  let modal = document.createElement("div");
+  modal.className = "modal fade";
+  modal.id = "exampleModal";
+  modal.tabIndex = "-1";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-hidden", "true");
+
+  let modalDialog = document.createElement("div");
+  modalDialog.className = "modal-dialog";
+  modalDialog.setAttribute("role", "document");
+
+  let modalContent = document.createElement("div");
+  modalContent.className = "modal-content";
+
+  let modalH = document.createElement("div");
+  modalH.className = "modal-header";
+
+  let modalTitle = document.createElement("h4");
+  modalTitle.innerText = "Cancel the order";
+
+  let modalC = document.createElement("button");
+  modalC.className = "close";
+  modalC.setAttribute("data-dismiss", "modal");
+  modalC.setAttribute("aria-label", "Close");
+
+  let modalClose = document.createElement("span");
+  modalClose.id = "close";
+  modalClose.className = "close";
+  modalClose.innerHTML = "&times;";
+
+  modalC.appendChild(modalClose);
+
+  let hr1 = document.createElement("hr");
+
+  modalH.appendChild(modalTitle);
+  modalH.appendChild(modalC);
+  modalH.appendChild(hr1);
+
+  let modalB = document.createElement("div");
+  modalB.className = "modal-body";
+  modalB.innerHTML = "Are you sure about cancelling the order?";
+
+  let modalF = document.createElement("div");
+  modalF.className = "modal-footer";
+
+  let buttonCancel = document.createElement("button");
+  buttonCancel.className = "btn btn-light";
+  buttonCancel.setAttribute("data-dismiss", "modal");
+  buttonCancel.innerHTML = "Yes, I want to cancel the order";
+  buttonCancel.addEventListener("click", () => {
+    quitarItemsCarrito();
+  });
+
+  let buttonContinue = document.createElement("button");
+  buttonContinue.className = "btn btn-danger";
+  buttonContinue.setAttribute("data-dismiss", "modal");
+  buttonContinue.innerHTML = "No, I want to continue adding products";
+
+  modalF.appendChild(buttonCancel);
+  modalF.appendChild(buttonContinue);
+
+  modalContent.appendChild(modalH);
+  modalContent.appendChild(modalB);
+  modalContent.appendChild(modalF);
+
+  modalDialog.appendChild(modalContent);
+
+  modal.appendChild(modalDialog);
+
+  bodyDoc.appendChild(modal);
+}
 
 //Función crear de tarjetas
 function createCards(n) {
@@ -253,11 +336,17 @@ function orderFunction() {
   cancel.type = "button";
   cancel.className = "btn btn-danger";
   cancel.innerHTML = "Cancel";
+  cancel.setAttribute("data-toggle", "modal");
+  cancel.setAttribute("data-target", "#exampleModal");
 
   let confirm = document.createElement("button");
   confirm.type = "button";
   confirm.className = "btn btn-light";
   confirm.innerHTML = "Confirm order";
+  confirm.addEventListener("click", () => {
+    console.log("compra", cart);
+    quitarItemsCarrito();
+  });
 
   botones.appendChild(cancel);
   botones.appendChild(confirm);
